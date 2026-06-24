@@ -75,7 +75,8 @@ def block_ip(ip: str, duration: int = None):
         ], check=True, capture_output=True)
 
         log_alert("AUTO BLOCK", ip, f"Blocked for {duration} seconds")
-        print(f"🔒 IP {ip} blocked for {duration} seconds")
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] IP {ip} blocked for {duration} seconds")
     except Exception as e:
         print(f"Failed to block {ip}: {e}")
 
@@ -89,7 +90,8 @@ def cleanup_expired_blocks():
             expired = [ip for ip, exp in list(BLOCKED_IPS.items()) if current > exp]
             for ip in expired:
                 BLOCKED_IPS.pop(ip, None)
-                print(f"🕒 Block for {ip} has expired - monitoring resumed")
+                timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"[{timestamp}] Block for {ip} has expired - monitoring resumed")
 
 
 # ====================== ALERT ======================
@@ -151,7 +153,7 @@ def packet_callback(packet):
 
 # ====================== MAIN ======================
 def start_nids():
-    print(f"🚀 NIDS started on interface: {INTERFACE}")
+    print(f"Network Intrusion Detection System started on interface: {INTERFACE}")
     print(f"Auto-block duration: {BLOCK_DURATION} seconds")
     print("Press Ctrl+C to stop\n")
 
