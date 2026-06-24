@@ -11,6 +11,7 @@ Network Intrusion Detection System ( NIDS ) - Monitoring for: SYN Flood, Port Sc
 # Execute
 
     sudo python3 nids.py
+    sudo python3 nids.py --auto-block 600
 
 # Youtube Demo Video
 
