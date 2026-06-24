@@ -174,9 +174,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Python NIDS with Auto-Block")
     parser.add_argument("--auto-block", type=int, default=300,
                         help="Block duration in seconds (default: 300)")
+    parser.add_argument("--interface", type=str, default="eth0",
+                        help="Network interface (default: eth0)")
     args = parser.parse_args()
 
     BLOCK_DURATION = args.auto_block
+    INTERFACE = args.interface
 
     if os.geteuid() != 0:
         print("❌ Please run with sudo!")
